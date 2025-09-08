@@ -15,6 +15,10 @@ run/main_scene="uid://d3dt12exogmvn"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Connections="*res://Scripts/connection_manager.gd"
+
 [input]
 
 left={
