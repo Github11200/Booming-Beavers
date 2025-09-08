@@ -1,16 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://d3dt12exogmvn"]
+[gd_scene load_steps=7 format=3 uid="uid://d3dt12exogmvn"]
 
-[ext_resource type="Script" uid="uid://dgiw1p1b0w0jx" path="res://Scripts/player.gd" id="1_bo1nx"]
-[ext_resource type="Script" uid="uid://l6im6sqdvmk8" path="res://Scripts/connection_manager.gd" id="2_8gbba"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_iw7eq"]
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1boii"]
-
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ig7tw"]
-properties/0/path = NodePath("CharacterBody3D:health")
-properties/0/spawn = true
-properties/0/replication_mode = 2
+[ext_resource type="PackedScene" uid="uid://d2a7qdfuc1rme" path="res://player.tscn" id="1_bo1nx"]
+[ext_resource type="Script" uid="uid://py1k2y6vhqmc" path="res://Scenes/multiplayer_spawner.gd" id="1_jjgbg"]
+[ext_resource type="PackedScene" uid="uid://6hoamojaxorj" path="res://ui.tscn" id="2_bo1nx"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_ig7tw"]
 
@@ -19,42 +11,21 @@ properties/0/replication_mode = 2
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0xm2m"]
 albedo_texture = SubResource("PlaceholderTexture2D_ig7tw")
 
-[node name="Enemy" type="Node3D"]
+[node name="Main" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 2.65744, 0)
 shadow_enabled = true
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.879972, 0)
-script = ExtResource("1_bo1nx")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D"]
-mesh = SubResource("CapsuleMesh_iw7eq")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
-shape = SubResource("CapsuleShape3D_1boii")
-
-[node name="Camera Origin" type="Node3D" parent="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.609842, 0)
-
-[node name="SpringArm3D" type="SpringArm3D" parent="CharacterBody3D/Camera Origin"]
-spring_length = 2.0
-margin = 0.5
-
-[node name="Camera3D" type="Camera3D" parent="CharacterBody3D/Camera Origin/SpringArm3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.93362)
-
-[node name="Game" type="Node" parent="."]
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="Game"]
-root_path = NodePath("../..")
-replication_config = SubResource("SceneReplicationConfig_ig7tw")
-
-[node name="Connection Manager" type="Node" parent="Game"]
-script = ExtResource("2_8gbba")
-
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(9.58689, -0.075044, 0.00478001, -0.00538415, -0.0771634, 9.58687, -0.075003, -9.58658, -0.0772032, 0, -0.29049, 0)
 mesh = SubResource("QuadMesh_ig7tw")
 surface_material_override/0 = SubResource("StandardMaterial3D_0xm2m")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://d2a7qdfuc1rme")
+spawn_path = NodePath("..")
+script = ExtResource("1_jjgbg")
+network_player = ExtResource("1_bo1nx")
+
+[node name="CanvasLayer" parent="." instance=ExtResource("2_bo1nx")]

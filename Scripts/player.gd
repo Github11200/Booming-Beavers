@@ -5,24 +5,35 @@ const JUMP_VELOCITY = 4.5
 
 @onready var pivot = $"Camera Origin"
 @export var sensitivity = 0.5
-@export var health: float = 100
 
-func _ready():
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+var rebound = true
+var rebound2 = true
 
-func _input(event):
-	if event is InputEventMouseMotion:
-		rotate_y(deg_to_rad(-event.relative.x * sensitivity))
-		pivot.rotate_x(deg_to_rad(-event.relative.y * sensitivity))
-		pivot.rotation.x = clamp(pivot.rotation.x, deg_to_rad(-90), deg_to_rad(45))
+func _enter_tree() -> void:
+	set_multiplayer_authority(name.to_int())
+
+#func _ready():
+	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
+#func _input(event):
+	#if event is InputEventMouseMotion:
+		#rotate_y(deg_to_rad(-event.relative.x * sensitivity))
+		#pivot.rotate_x(deg_to_rad(-event.relative.y * sensitivity))
+		#pivot.rotation.x = clamp(pivot.rotation.x, deg_to_rad(-90), deg_to_rad(45))
 
 func _process(delta):
-	if Input.is_key_pressed(KEY_H):
-		Connections.create_server()
-	if Input.is_key_pressed(KEY_P):
-		Connections.join_server()
+	if Input.is_key_label_pressed(KEY_H):
+		if rebound:
+			Connections.create_server()
+			rebound = false
+	if Input.is_key_label_pressed(KEY_J):
+		if rebound2:
+			Connections.join_server()
+			rebound2 = false
 
 func _physics_process(delta: float) -> void:
+	if not is_multiplayer_authority(): return
+	
 	if Input.is_action_just_pressed("quit"):
 		get_tree().quit()
 		

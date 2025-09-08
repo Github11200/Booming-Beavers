@@ -1,7 +1,8 @@
 class_name ConnectionManager
-extends Node
+extends MultiplayerSpawner
 
-const PORT = 5000
+@export var player_scene: PackedScene
+const PORT = 42069
 
 func create_server() -> void:
 	var peer = ENetMultiplayerPeer.new()
@@ -13,20 +14,10 @@ func create_server() -> void:
 		print("end me ", res)
 	
 	multiplayer.multiplayer_peer = peer
-	
-	multiplayer.peer_connected.connect(
-		func(peer_id: int) -> void:
-			print(peer_id)
-	)
-	
-	multiplayer.peer_disconnected.connect(
-		func(peer_id: int) -> void:
-			print(str(peer_id) + " has left the game!")
-	)
 
 func join_server() -> void:
 	var peer = ENetMultiplayerPeer.new()
-	var res = peer.create_client("127.0.0.1", PORT)
+	var res = peer.create_client("localhost", PORT)
 	
 	if res == OK:
 		print("Connected!")
