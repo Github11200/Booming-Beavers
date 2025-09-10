@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://d3dt12exogmvn"]
+[gd_scene load_steps=6 format=3 uid="uid://d3dt12exogmvn"]
 
 [ext_resource type="PackedScene" uid="uid://d2a7qdfuc1rme" path="res://Scenes/player.tscn" id="1_bo1nx"]
 [ext_resource type="Script" uid="uid://py1k2y6vhqmc" path="res://Scripts/multiplayer_spawner.gd" id="1_jjgbg"]
 [ext_resource type="Texture2D" uid="uid://dueypue8t60a6" path="res://icon.svg" id="1_jjvhh"]
-[ext_resource type="PackedScene" uid="uid://6hoamojaxorj" path="res://Scenes/ui.tscn" id="2_bo1nx"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_ig7tw"]
 
@@ -17,7 +16,7 @@ transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75
 shadow_enabled = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(9.58689, -0.075044, 0.00478001, -0.00538415, -0.0771634, 9.58687, -0.075003, -9.58658, -0.0772032, 0, -0.29049, 0)
+transform = Transform3D(-0.0750034, -9.58658, -0.0772032, -0.00538415, -0.0771634, 9.58687, -9.58689, 0.0750444, -0.00478001, 0, -0.29049, 0)
 mesh = SubResource("QuadMesh_ig7tw")
 surface_material_override/0 = SubResource("StandardMaterial3D_0xm2m")
 
@@ -27,9 +26,9 @@ spawn_path = NodePath("..")
 script = ExtResource("1_jjgbg")
 network_player = ExtResource("1_bo1nx")
 
-[node name="CanvasLayer" parent="." instance=ExtResource("2_bo1nx")]
-
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 4.18156, 0)
+transform = Transform3D(-0.000886405, -0.999999, -0.00125006, -0.000104388, -0.00124997, 0.999999, -1, 0.000886536, -0.000103267, 0, 4.18156, 0)
 projection = 1
 size = 9.66335
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("1_bo1nx")]
