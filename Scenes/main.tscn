@@ -2,14 +2,13 @@
 
 [ext_resource type="PackedScene" uid="uid://d2a7qdfuc1rme" path="res://Scenes/player.tscn" id="1_bo1nx"]
 [ext_resource type="Script" uid="uid://py1k2y6vhqmc" path="res://Scripts/multiplayer_spawner.gd" id="1_jjgbg"]
+[ext_resource type="Texture2D" uid="uid://dueypue8t60a6" path="res://icon.svg" id="1_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://6hoamojaxorj" path="res://Scenes/ui.tscn" id="2_bo1nx"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_ig7tw"]
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ig7tw"]
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0xm2m"]
-albedo_texture = SubResource("PlaceholderTexture2D_ig7tw")
+albedo_texture = ExtResource("1_jjvhh")
 
 [node name="Main" type="Node3D"]
 
@@ -29,3 +28,8 @@ script = ExtResource("1_jjgbg")
 network_player = ExtResource("1_bo1nx")
 
 [node name="CanvasLayer" parent="." instance=ExtResource("2_bo1nx")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 4.18156, 0)
+projection = 1
+size = 9.66335
