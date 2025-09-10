@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://d3dt12exogmvn"]
 
-[ext_resource type="PackedScene" uid="uid://d2a7qdfuc1rme" path="res://player.tscn" id="1_bo1nx"]
-[ext_resource type="Script" uid="uid://py1k2y6vhqmc" path="res://Scenes/multiplayer_spawner.gd" id="1_jjgbg"]
-[ext_resource type="PackedScene" uid="uid://6hoamojaxorj" path="res://ui.tscn" id="2_bo1nx"]
+[ext_resource type="PackedScene" uid="uid://d2a7qdfuc1rme" path="res://Scenes/player.tscn" id="1_bo1nx"]
+[ext_resource type="Script" uid="uid://py1k2y6vhqmc" path="res://Scripts/multiplayer_spawner.gd" id="1_jjgbg"]
+[ext_resource type="PackedScene" uid="uid://6hoamojaxorj" path="res://Scenes/ui.tscn" id="2_bo1nx"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_ig7tw"]
 
