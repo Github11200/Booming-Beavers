@@ -19,8 +19,12 @@ func _input(event):
 	if event is InputEventMouseButton:
 		var newBullet = bullet.instantiate()
 		add_child(newBullet)
+		var origin_y = event.global_position.y - 648
+		var origin_x = event.global_position.x - 1152
+		
 	if event is InputEventMouseMotion:
-		rotation.y += event.relative.y * sensitivity
+		print(event.global_position)
+		
 		#look_at(Vector3(event.global_position.x, 0, event.global_position.y))
 		#rotate_y(deg_to_rad(event.relative.x * sensitivity))
 		#pivot.rotate_x(deg_to_rad(-event.relative.y * sensitivity))
