@@ -5,12 +5,15 @@ extends CharacterBody3D
 @export var gravity : float = 50
 
 var direction : int
+var spellStarted : bool = false
+var spells : Array[Spell] = []
 
 func _ready() -> void:
-	pass
+	# name, keybinding, damage, defense
+	var vim = Spell.new().create("vim", "hjkl", 50, 0)
+	spells.push_back(vim)
 
 func _physics_process(delta: float) -> void:
-	
 	if is_on_floor():
 		velocity.y = 0
 		if Input.is_action_pressed("jump"):
@@ -24,6 +27,10 @@ func _physics_process(delta: float) -> void:
 		direction -= 1
 	if Input.is_action_pressed("right"):
 		direction += 1
+	if Input.is_action_pressed("exit"):
+		get_tree().quit()
+	if Input.is_action_pressed("spellInit") and not spellStarted:
+		spellStarted = true
 	
 	velocity.x = direction * speed
 	

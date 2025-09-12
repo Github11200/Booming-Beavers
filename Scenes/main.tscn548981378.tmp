@@ -1,0 +1,53 @@
+[gd_scene load_steps=5 format=3 uid="uid://c6esgumbv4qtq"]
+
+[ext_resource type="PackedScene" uid="uid://bq71wl4hpsufl" path="res://Scenes/player.tscn" id="1_jjgbg"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_0xm2m"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_h2yge"]
+
+[sub_resource type="GDScript" id="GDScript_jjgbg"]
+script/source = "extends MultiplayerSpawner
+"
+
+[node name="Main" type="Node3D"]
+
+[node name="Player" parent="." instance=ExtResource("1_jjgbg")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(20.062, 0, 0, 0, 1.182, 0, 0, 0, 1.66232, 0, -1.69616, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_0xm2m")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_h2yge")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.014761, -0.218323, 10.4157)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.999999, 0.00106519, 0.000900628, -0.00139226, 0.801933, 0.597412, -8.59001e-05, -0.597412, 0.801934, 0, 5.8306, 7.5415)
+
+[node name="MultiplayerManager" type="Node" parent="."]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="MultiplayerManager"]
+_spawnable_scenes = PackedStringArray("uid://bq71wl4hpsufl")
+spawn_path = NodePath("../..")
+script = SubResource("GDScript_jjgbg")
+
+[node name="CanvasGroup" type="CanvasGroup" parent="MultiplayerManager"]
+
+[node name="Host" type="Button" parent="MultiplayerManager/CanvasGroup"]
+offset_left = 27.0
+offset_top = 23.0
+offset_right = 212.0
+offset_bottom = 79.0
+text = "HOST"
+
+[node name="Join" type="Button" parent="MultiplayerManager/CanvasGroup"]
+offset_left = 26.0
+offset_top = 95.0
+offset_right = 211.0
+offset_bottom = 151.0
+text = "JOIN"
