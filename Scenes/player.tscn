@@ -1,33 +1,24 @@
-[gd_scene load_steps=7 format=3 uid="uid://d2a7qdfuc1rme"]
+[gd_scene load_steps=5 format=3 uid="uid://bq71wl4hpsufl"]
 
-[ext_resource type="Script" uid="uid://dgiw1p1b0w0jx" path="res://Scripts/player.gd" id="1_4flbx"]
-[ext_resource type="PackedScene" uid="uid://cd2akt05dqerd" path="res://Scenes/bullet.tscn" id="2_cvnsp"]
+[ext_resource type="Script" uid="uid://lc8seck4sbpl" path="res://Scripts/player.gd" id="1_v0iea"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_iw7eq"]
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_7dm0k"]
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_4flbx"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ig7tw"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_v0iea"]
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/replication_mode = 1
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_v0iea"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_v0iea"]
-
-[node name="CharacterBody3D" type="CharacterBody3D"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
-script = ExtResource("1_4flbx")
-bullet = ExtResource("2_cvnsp")
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_v0iea")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("CapsuleMesh_iw7eq")
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_4flbx")
+mesh = SubResource("CapsuleMesh_7dm0k")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("CapsuleShape3D_v0iea")
+shape = SubResource("CapsuleShape3D_ig7tw")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.340962, 0, 0, 0, 0.179053, 0, 0, 0, 1.55811, 0, 0.49837, 0.361144)
-mesh = SubResource("BoxMesh_v0iea")
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_v0iea")
